@@ -165,10 +165,10 @@ class ChatBubble extends LitElement {
             value: value,
             min: this.min,
             max: this.max,
-            key: this.key,
+            key: this.key == "undefined" ? undefined : this.key,
             isUserMessage,
-            isOwnMessage: this.isOwnMessage,
-            isSelectable: this.isSelectable,
+            isOwnMessage: this.isOwnMessage != undefined,
+            isSelectable: this.isSelectable != undefined,
         },
         bubbles: true, 
         composed: true,
@@ -179,6 +179,7 @@ class ChatBubble extends LitElement {
   firstUpdated() {
     // Set correct default values
     this.max = this.max ? this.max : 5;
+    this.min = this.min ? this.min : 0;
     this.value = this.value < this.min ? this.min : this.value;
     this.value = this.value > this.max ? this.max : this.value;
     this.previousValue = null;
