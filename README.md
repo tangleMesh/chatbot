@@ -16,9 +16,9 @@ In order to use this chatbot after npm package installation you only have to imp
         title="Example chatbot"
     ></tanglemesh-chatbot>
 
-    <script src="bundle.js"></script>
+    <script src="node_modules/@tanglmesh/chatbot/build/bundle.js"></script>
     <!-- Only for browser-compatibility -->
-    <script src="webcomponents-loader.js"></script> 
+    <script src="node_modules/@tanglmesh/chatbot/build/webcomponents-loader.js"></script> 
 
 ## Configuration
 
