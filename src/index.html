@@ -7,20 +7,23 @@
     </head>
     <body>
 
-        <tanglemesh-chatbot id="test1" title="Example chatbot" avatar="https://img2.pngio.com/avatar-headset-male-man-person-support-young-icon-avatar-person-png-512_512.png"></tanglemesh-chatbot>
-        <br /><br /><br />
-        <tanglemesh-chatbot 
-            title="Example chatbot"
-            disabled
-        ></tanglemesh-chatbot>
+        <tanglemesh-chatbot maxHeight="60vh" id="test1" inputPlaceholder="Ihre Nachricht..." title="Example chatbot" avatar="https://img2.pngio.com/avatar-headset-male-man-person-support-young-icon-avatar-person-png-512_512.png"></tanglemesh-chatbot>
 
         <script src="bundle.js"></script>
         <script src="webcomponents-loader.js"></script>
         <script>
             document.addEventListener ("DOMContentLoaded", () => {
-                document.getElementById ("test1").addEventListener ("change", (e) => {
+                const $chatbot = document.getElementById ("test1");
+                $chatbot.addEventListener ("change", (e) => {
                     console.log ("CHANGE", e.detail);
                 });
+                $chatbot.addEventListener ("click", (e) => {
+                    console.log ("CLICK", e.detail);
+                });
+
+                // setTimeout (() => {
+                //     $chatbot.messages = $chatbot.messages.slice(0, 3);
+                // }, 5000);
             });
         </script>
     </body>

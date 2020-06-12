@@ -13,6 +13,9 @@ class ChatInput extends LitElement {
       isOwnMessage: { 
         type: Boolean 
       },
+      placeholder: { 
+        type: String 
+      },
     };
   }
 
@@ -87,6 +90,7 @@ class ChatInput extends LitElement {
         id="message-input"
         class="message-input"
         @keyup="${this.messageInput}"
+        placeholder="${this.placeholder}"
       ></textarea>
     `;
   }

@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
 
 import "./chat-bubble";
 import "./chat-input";
@@ -18,7 +18,13 @@ class Chatbot extends LitElement {
       },
       messages: {
         type: Array,
-      }
+      },
+      inputPlaceholder: {
+        type: String,
+      },
+      maxHeight: {
+        type: String,
+      },
     };
   }
 
@@ -60,8 +66,13 @@ class Chatbot extends LitElement {
         link: "https://google.com",
         content: "Weiter zum Formular",
         openNewTab: false,
+        isEventLink: true,
       },
     ];
+  }
+
+  firstUpdated () {
+    this.updateScrollPosition ();
   }
 
   static get styles() {
@@ -106,7 +117,10 @@ class Chatbot extends LitElement {
         vertical-align: middle;
       }
       .messages-container {
+        scroll-behavior: smooth;
         padding: 12px;
+        overflow: auto;
+        max-height: 80vh;
       }
       .input-container {
         border-top: 1px solid #ececec;
@@ -120,10 +134,18 @@ class Chatbot extends LitElement {
       content,
     });
     this.requestUpdate();
+    this.updateScrollPosition ();
   }
   
   messageInputSubmit (e) {
     this.newMessage (e.detail.message);
+  }
+
+  updateScrollPosition () {
+    const $messageContainer = this.shadowRoot.querySelector (".messages-container");
+    setTimeout (() => {
+      $messageContainer.scrollTop = $messageContainer.scrollHeight;
+    }, 10);
   }
 
   render () {
@@ -147,6 +169,7 @@ class Chatbot extends LitElement {
         <div 
           id="messages-container"
           class="messages-container" 
+          style="max-height: ${this.maxHeight || "80vh"};"
         >
           ${
             this.messages.map (message => html`
@@ -159,6 +182,7 @@ class Chatbot extends LitElement {
                 key=${message.key}
                 link=${message.link}
                 ?openNewTab=${message.openNewTab}
+                ?isEventLink=${message.isEventLink}
               >${message.content}</tanglemesh-chatbubble>
             `)
           }
@@ -167,6 +191,7 @@ class Chatbot extends LitElement {
           <tanglemesh-chatinput
             @submit="${this.messageInputSubmit}"
             ?disabled="${this.disabled}"
+            placeholder="${this.inputPlaceholder}"
           ></tanglemesh-chatinput>
         </div>
       </article>

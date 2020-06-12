@@ -28,6 +28,8 @@ The chatbot-component (`<tanglemesh-chatbot />`) is configurable with the follow
 * `title`: the title of the chatbot. If skipped, there is simply no header for the chatbot
 * `avatar`: a link to the avatar to be shown. `title` is required, otherwise the avatar will not be shown!
 * `messages`: an array of initial messages to be shown to the user (more below)
+* `inputPlaceholder`: a string that will be shown in the input-field if no text entered by the user
+* `maxHeight`: the maximum height of the messages container. Defaults to `80vh`
 
 ## Messages
 
@@ -69,11 +71,12 @@ A link messages provides you the functionality to link to an internal or externa
         content: "The actual message to be shown",
         link: "https://google.com/", // the link the user get's redirected to
         openNewTab: true, // if the user should open this page in a new tab (external) or not (internal)
+        isEventLink: true, // if this is a native link (`isEventLink=false`) or if only a event should be fired once the button has clicked (event-name: click)
     }
 
 ## Events
 
-There exists an event that informs you about any interaction the user has made with your chatbot:
+There exists two events that informs you about any interaction the user has made with your chatbot:
 
     <tanglemesh-chatbot 
         title="Example chatbot"
@@ -85,10 +88,13 @@ There exists an event that informs you about any interaction the user has made w
             document.getElementById ("firstChatbot").addEventListener ("change", (e) => {
                 console.log ("CHANGE", e.detail);
             });
+            document.getElementById ("firstChatbot").addEventListener ("click", (e) => {
+                console.log ("CHANGE", e.detail);
+            });
         });
     </script>
 
-The `change` event will inform you about new user messages or interactions with your selection messages. The `event.detail` property will provide you with the available information about the user interaction:
+The `change` event will inform you about new user messages or interactions with your selection messages. The `click` event informs you about a link-button (`isEventLink: true`) beeing clicked. The `event.detail` property will provide you with the available information about the user interaction:
 
 ### Selection message
 
@@ -112,4 +118,11 @@ The `change` event will inform you about new user messages or interactions with 
         max: 5
         min: 0
         value: "test"
+    }
+
+### Link message
+
+    {
+        isOwnMessage: true,
+        key: "identifier-for-link,
     }

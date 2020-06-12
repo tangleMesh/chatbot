@@ -28,6 +28,9 @@ class ChatBubble extends LitElement {
         openNewTab: {
             type: Boolean,
         },
+        isEventLink: {
+          type: Boolean,
+        },
     };
   }
 
@@ -160,7 +163,7 @@ class ChatBubble extends LitElement {
         return;
     }
     this.previousValue = value;
-    let event = new CustomEvent('change', {
+    const event = new CustomEvent('change', {
         detail: {
             value: value,
             min: this.min,
@@ -176,14 +179,31 @@ class ChatBubble extends LitElement {
     this.dispatchEvent(event);
   }
 
+  buttonClicked (e) {
+    if (this.isEventLink != true) {
+      return;
+    }
+    e.preventDefault ();
+    const event = new CustomEvent('click', {
+      detail: {
+          key: this.key == "undefined" ? undefined : this.key,
+          isOwnMessage: this.isOwnMessage != undefined,
+      },
+      bubbles: true, 
+      composed: true,
+    });
+    this.dispatchEvent(event);
+  }
+
   firstUpdated() {
     // Set correct default values
     this.max = this.max ? this.max : 5;
     this.min = this.min ? this.min : 0;
     this.value = this.value < this.min ? this.min : this.value;
     this.value = this.value > this.max ? this.max : this.value;
+    this.isEventLink = this.isEventLink == true;
     this.previousValue = null;
-
+    
     if (this.isOwnMessage == true) {
         this.valueChanged (this.shadowRoot.querySelector ("slot").assignedNodes()[0].textContent, true);
     }
@@ -198,17 +218,16 @@ class ChatBubble extends LitElement {
                 href="${this.link}"
                 target="_blank"
                 class="message-button message-button--external"
+                @click="${this.buttonClicked}"
             ><slot></slot></a>`;
         } else {
             template = html`<a 
                 type="button"
                 href="${this.link}"
                 class="message-button message-button--internal"
+                @click="${this.buttonClicked}"
             ><slot></slot></a>`;
         }
-        // template = html`<button
-
-        // BUTTON`;
     } else {
         template = html`<span 
             class="${this.isSelectable ? " message--selectable" : ""}"
