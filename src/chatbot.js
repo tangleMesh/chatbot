@@ -30,45 +30,7 @@ class Chatbot extends LitElement {
 
   constructor () {
     super ();
-    this.messages = [
-      {
-        isOwnMessage: true,
-        content: "Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message",
-      },
-      {
-        isOwnMessage: false,
-        content: "Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message",
-      },
-      {
-        isOwnMessage: false,
-        content: "UX Designer",
-        isSelectable: true,
-        min: 0,
-        max: 2,
-        value: 0,
-        key: "des_ux"
-      },
-      {
-        isOwnMessage: false,
-        content: "Web developer",
-        isSelectable: true,
-        min: 1,
-        max: 5,
-        value: 0,
-        key: "web_dev"
-      },
-      {
-        link: "https://google.com",
-        content: "Weiter zum Formular",
-        openNewTab: true,
-      },
-      {
-        link: "https://google.com",
-        content: "Weiter zum Formular",
-        openNewTab: false,
-        isEventLink: true,
-      },
-    ];
+    this.messages = [];
   }
 
   firstUpdated () {
@@ -76,28 +38,30 @@ class Chatbot extends LitElement {
   }
 
   static get styles() {
-    // $color-dark:           #363636;
-    // $color-light:          #FFFFFF;
-    // $color-background:     #fafafa;
-    // $color-primary-dark:   #387368;
-    // $color-primary:        #03A678;
-    // $color-primary-light:  #65A688;
-    // $color-secondary:      #D99789;
-    // $color-secondary-dark: #D98982;
     return css`
+      :host, 
+      article {
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+      }
       * {
         box-sizing: border-box;
       }
       article {
         border-radius: 4px;
-        box-shadow: 1px 1px 4px #d2d2d2;
         font-family: 'Roboto', sans-serif;
-
+        border: 1px solid #ececec;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
       }
       header {
         width: 100%;
         padding: 12px;
         border-bottom: 1px solid #ececec;
+        flex: 0 1 auto;
       }
       .title {
         display: inline-block;
@@ -121,9 +85,11 @@ class Chatbot extends LitElement {
         padding: 12px;
         overflow: auto;
         max-height: 80vh;
+        flex: 1 1 auto;
       }
       .input-container {
         border-top: 1px solid #ececec;
+        flex: 0 1 auto;
       }
     `;
   }
@@ -149,15 +115,12 @@ class Chatbot extends LitElement {
   }
 
   render () {
-    // Components needed:
-
-    // 1. Text-Box (raw-text, loading, icons) [sender, receiver]
-    // 2. Text-Input
-    // 3. Text-Selection (Single text-box that should be selectable [even multipletimes])
     return html`
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-      <article>
+      <article
+        style="max-height: ${this.maxHeight || "80vh"};"
+      >
         ${ this.title ? html`
           <header>
             ${ this.avatar ? html`
@@ -169,7 +132,6 @@ class Chatbot extends LitElement {
         <div 
           id="messages-container"
           class="messages-container" 
-          style="max-height: ${this.maxHeight || "80vh"};"
         >
           ${
             this.messages.map (message => html`

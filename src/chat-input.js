@@ -77,11 +77,6 @@ class ChatInput extends LitElement {
   }
   
   render () {
-    // Components needed:
-
-    // 1. Text-Box (raw-text, loading, icons) [sender, receiver]
-    // 2. Text-Input
-    // 3. Text-Selection (Single text-box that should be selectable [even multipletimes])
     return html`
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 

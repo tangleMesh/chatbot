@@ -5,9 +5,9 @@
         <meta charset='utf-8'>
 	    <meta name='viewport' content='width=device-width'>
     </head>
-    <body>
+    <body style="height: 80vh;">
 
-        <tanglemesh-chatbot maxHeight="60vh" id="test1" inputPlaceholder="Ihre Nachricht..." title="Example chatbot" avatar="https://img2.pngio.com/avatar-headset-male-man-person-support-young-icon-avatar-person-png-512_512.png"></tanglemesh-chatbot>
+        <tanglemesh-chatbot id="test1" inputPlaceholder="Ihre Nachricht..." title="Example chatbot" avatar="https://img2.pngio.com/avatar-headset-male-man-person-support-young-icon-avatar-person-png-512_512.png"></tanglemesh-chatbot>
 
         <script src="bundle.js"></script>
         <script src="webcomponents-loader.js"></script>
@@ -21,9 +21,47 @@
                     console.log ("CLICK", e.detail);
                 });
 
-                // setTimeout (() => {
-                //     $chatbot.messages = $chatbot.messages.slice(0, 3);
-                // }, 5000);
+                setTimeout (() => {
+                    $chatbot.messages = [
+                        {
+                            isOwnMessage: true,
+                            content: "Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message",
+                        },
+                        {
+                            isOwnMessage: false,
+                            content: "Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message",
+                        },
+                        {
+                            isOwnMessage: false,
+                            content: "UX Designer",
+                            isSelectable: true,
+                            min: 0,
+                            max: 2,
+                            value: 0,
+                            key: "des_ux"
+                        },
+                        {
+                            isOwnMessage: false,
+                            content: "Web developer",
+                            isSelectable: true,
+                            min: 1,
+                            max: 5,
+                            value: 0,
+                            key: "web_dev"
+                        },
+                        {
+                            link: "https://google.com",
+                            content: "Weiter zum Formular",
+                            openNewTab: true,
+                        },
+                        {
+                            link: "https://google.com",
+                            content: "Weiter zum Formular",
+                            openNewTab: false,
+                            isEventLink: true,
+                        },
+                    ];
+                }, 5000);
             });
         </script>
     </body>

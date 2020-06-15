@@ -33,6 +33,37 @@ The chatbot-component (`<tanglemesh-chatbot />`) is configurable with the follow
 
 ## Messages
 
+To add messages to the chatbot simply update the `messages` array of the `tanglemesh-chatbot` element:
+
+    <tanglemesh-chatbot 
+        title="Example chatbot"
+        id="firstChatbot"
+    ></tanglemesh-chatbot>
+
+    <script>
+        document.addEventListener ("DOMContentLoaded", () => {
+            const $chatbot = document.getElementById ("chatbot-test");
+            $chatbot.addEventListener ("change", (e) => {
+                console.log ("CHANGE", e.detail);
+            });
+            $chatbot.addEventListener ("click", (e) => {
+                console.log ("CLICK", e.detail);
+            });
+            setTimeout (() => {
+                $chatbot.messages = [
+                    {
+                        isOwnMessage: true,
+                        content: "Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message Some own message",
+                    },
+                    {
+                        isOwnMessage: false,
+                        content: "Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message Some other message",
+                    },
+                ];
+            }, 5000);
+        });
+    </script>
+
 There are different formats of messages: *text-messages*, *selection-messages* and *link-messages*.
 
 ### Text messages
