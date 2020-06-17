@@ -1,6 +1,6 @@
 {
   "name": "@tanglemesh/chatbot",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "A small chatbot widget for websites",
   "main": "src/chatbot.js",
   "module": "src/chatbot.js",

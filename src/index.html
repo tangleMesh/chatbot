@@ -14,11 +14,11 @@
         <script>
             document.addEventListener ("DOMContentLoaded", () => {
                 const $chatbot = document.getElementById ("test1");
-                $chatbot.addEventListener ("change", (e) => {
-                    console.log ("CHANGE", e.detail);
+                $chatbot.addEventListener ("message-changed", (e) => {
+                    console.log ("message-changed", e.detail);
                 });
-                $chatbot.addEventListener ("click", (e) => {
-                    console.log ("CLICK", e.detail);
+                $chatbot.addEventListener ("message-clicked", (e) => {
+                    console.log ("message-clicked", e.detail);
                 });
 
                 setTimeout (() => {

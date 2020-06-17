@@ -52,7 +52,7 @@ class ChatInput extends LitElement {
   }
 
   submitMessage (message) {
-    let event = new CustomEvent('submit', {
+    let event = new CustomEvent('new-message', {
         detail: {
             message,
         },

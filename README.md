@@ -42,12 +42,12 @@ To add messages to the chatbot simply update the `messages` array of the `tangle
 
     <script>
         document.addEventListener ("DOMContentLoaded", () => {
-            const $chatbot = document.getElementById ("chatbot-test");
-            $chatbot.addEventListener ("change", (e) => {
-                console.log ("CHANGE", e.detail);
+            const $chatbot = document.getElementById ("firstChatbot");
+            $chatbot.addEventListener ("message-changed", (e) => {
+                console.log ("message-changed", e.detail);
             });
-            $chatbot.addEventListener ("click", (e) => {
-                console.log ("CLICK", e.detail);
+            $chatbot.addEventListener ("message-clicked", (e) => {
+                console.log ("message-clicked", e.detail);
             });
             setTimeout (() => {
                 $chatbot.messages = [
@@ -125,9 +125,9 @@ There exists two events that informs you about any interaction the user has made
         });
     </script>
 
-The `change` event will inform you about new user messages or interactions with your selection messages. The `click` event informs you about a link-button (`isEventLink: true`) beeing clicked. The `event.detail` property will provide you with the available information about the user interaction:
+The `message-changed` event will inform you about new user messages or interactions with your selection messages. The `message-clicked` event informs you about a link-button (`isEventLink: true`) beeing clicked. The `event.detail` property will provide you with the available information about the user interaction:
 
-### Selection message
+### Selection message (message-changed)
 
     {
         isOwnMessage: true
@@ -139,7 +139,7 @@ The `change` event will inform you about new user messages or interactions with 
         value: 1
     }
 
-### New user message
+### New user message (message-changed)
 
     {
         isOwnMessage: true
@@ -151,9 +151,10 @@ The `change` event will inform you about new user messages or interactions with 
         value: "test"
     }
 
-### Link message
+### Link message (message-clicked)
 
     {
         isOwnMessage: true,
         key: "identifier-for-link,
+        value: "test"
     }

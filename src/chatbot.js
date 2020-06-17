@@ -155,7 +155,7 @@ class Chatbot extends LitElement {
         </div>
         <div class="input-container">
           <tanglemesh-chatinput
-            @submit="${this.messageInputSubmit}"
+            @new-message="${this.messageInputSubmit}"
             ?disabled="${this.disabled}"
             placeholder="${this.inputPlaceholder}"
           ></tanglemesh-chatinput>

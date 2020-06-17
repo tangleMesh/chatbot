@@ -163,7 +163,7 @@ class ChatBubble extends LitElement {
         return;
     }
     this.previousValue = value;
-    const event = new CustomEvent('change', {
+    const event = new CustomEvent('message-changed', {
         detail: {
             value: value,
             min: this.min,
@@ -184,8 +184,9 @@ class ChatBubble extends LitElement {
       return;
     }
     e.preventDefault ();
-    const event = new CustomEvent('click', {
+    const event = new CustomEvent('message-clicked', {
       detail: {
+          value: this.value,
           key: this.key == "undefined" ? undefined : this.key,
           isOwnMessage: this.isOwnMessage != undefined,
       },
