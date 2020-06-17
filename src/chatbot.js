@@ -84,7 +84,6 @@ class Chatbot extends LitElement {
         scroll-behavior: smooth;
         padding: 12px;
         overflow: auto;
-        max-height: 80vh;
         flex: 1 1 auto;
       }
       .input-container {
@@ -114,12 +113,17 @@ class Chatbot extends LitElement {
     }, 10);
   }
 
+  updated(changedProperties) {
+    super.updated (changedProperties);
+    this.updateScrollPosition ();
+  }
+
   render () {
     return html`
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
       <article
-        style="max-height: ${this.maxHeight || "80vh"};"
+        style="max-height: ${this.maxHeight || "100%"};"
       >
         ${ this.title ? html`
           <header>
@@ -129,7 +133,7 @@ class Chatbot extends LitElement {
             <h2 class="title">${this.title}</h2>
           </header>
         ` : null }
-        <div 
+        <div
           id="messages-container"
           class="messages-container" 
         >
